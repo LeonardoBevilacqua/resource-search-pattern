@@ -1,0 +1,22 @@
+meta {
+  name: 3. Simple Query (Without Search Resource)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/products
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~category: electronics
+  ~brand: Apple
+  ~inStock: true
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}

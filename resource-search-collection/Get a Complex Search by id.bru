@@ -1,0 +1,32 @@
+meta {
+  name: Get a Complex Search by id
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/api/products/search/:searchId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  searchId: {{searchId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+assert {
+  res.body.searchId: eq {{searchId}}
+}
+
+script:post-response {
+  bru.setEnvVar("searchId", res.body.searchId);
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}

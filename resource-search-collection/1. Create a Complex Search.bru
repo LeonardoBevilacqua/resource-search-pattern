@@ -1,0 +1,107 @@
+meta {
+  name: 1. Create a Complex Search
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/products/search
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "filters": {
+      //"category": "electronics",
+      //"brand": "Apple",
+      //"minPrice": 500,
+      //"maxPrice": 1500,
+      //"inStock": true
+    },
+    "sort": [
+      "name",
+      "-price"
+    ],
+    "limit": 10
+  }
+}
+
+assert {
+  res.body.message: eq Search resource created successfully
+}
+
+script:post-response {
+  bru.setEnvVar("searchId", res.body.searchId);
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+example {
+  name: Base
+  
+  request: {
+    url: {{baseUrl}}/api/products/search
+    method: POST
+    mode: json
+    headers: {
+      Content-Type: application/json
+    }
+  
+    body:json: {
+      {
+        "filters": {
+          "category": "electronics",
+          "brand": "Apple",
+          "minPrice": 500,
+          "maxPrice": 1500,
+          "inStock": true
+        },
+        "sort": [
+          "-price",
+          "name"
+        ],
+        "limit": 5
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      x-powered-by: Express
+      content-type: application/json; charset=utf-8
+      content-length: 288
+      etag: W/"120-oRNrw7Q2qV8P8dV4+tbYtHkmSr4"
+      date: Wed, 19 Nov 2025 18:55:46 GMT
+      connection: keep-alive
+      keep-alive: timeout=5
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "searchId": "027df26e-dcc5-4a59-8f7a-6f17f3903eb2",
+          "message": "Search resource created successfully",
+          "expiresAt": "2025-11-19T19:10:46.462Z",
+          "links": {
+            "results": "/api/products?search_id=027df26e-dcc5-4a59-8f7a-6f17f3903eb2",
+            "self": "/api/product-search/027df26e-dcc5-4a59-8f7a-6f17f3903eb2"
+          }
+        }
+      '''
+    }
+  }
+}

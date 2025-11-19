@@ -1,0 +1,21 @@
+meta {
+  name: 2. Get Search Results (Cacheable GET)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/products?search_id={{searchId}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  search_id: {{searchId}}
+  ~page: 3
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
