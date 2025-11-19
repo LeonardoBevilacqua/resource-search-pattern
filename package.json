@@ -1,0 +1,24 @@
+{
+  "name": "resource-search-pattern",
+  "version": "1.0.0",
+  "description": "testing resource search pattern for complex filter",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "dev:debug": "node --watch --inspect server.js"
+  },
+  "keywords": [
+    "filters",
+    "resource",
+    "search",
+    "pattern"
+  ],
+  "author": "Leonardo Bevilacqua",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "uuid": "^13.0.0"
+  }
+}
